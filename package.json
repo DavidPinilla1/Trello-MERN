@@ -1,0 +1,22 @@
+{
+  "name": "trello-mern",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:front": "cd frontend && npm start",
+    "start:back": "cd backend && npm run dev",
+    "start": "concurrently \"npm run start:front\" \"npm run start:back\"",
+    "postinstall":"npm run install:front && npm run install:back",
+    "install:front": "cd frontend && npm install",
+    "install:back": "cd backend && npm install"
+  },
+  "keywords": [],
+  "author": "David Pinilla",
+  "license": "ISC"
+}
