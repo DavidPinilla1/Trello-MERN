@@ -1,0 +1,25 @@
+.Home {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    .newBoard {
+        all: unset;
+        border-radius: 0.3em;
+        padding: 2em;
+        border: 0.1em solid black;
+        background-color: rgba(129, 205, 255, 0.329);
+
+        &:hover {
+            cursor: pointer;
+            background-color: rgb(53, 147, 255);
+        }
+
+        &:active {
+            
+            background-color: rgb(0, 81, 173);
+        }
+    }
+}
