@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-const BoardItem = item => {
+import './BoardItem.scss'
+const BoardItem = props => {
   return (
-    <Link to={`/boards/${item._id}`} className="board_item">
-      <div className="board_header">
-        <h2>{item.name}</h2>
-      </div>
+    <Link to={`/boards/${props.item._id}`} className="board_item">
+      <p className="board_header">
+        {props.item.title}
+      </p>
     </Link>
   );
 };
