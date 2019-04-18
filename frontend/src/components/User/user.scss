@@ -1,0 +1,104 @@
+
+.bgregister,
+.bglogin {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    background-image: url('/images/airportBG.png');
+    height: 100%;
+}
+.Register, .Login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex:1;
+}
+.register,
+.login {
+    flex: 1;
+    margin: 2em;
+    padding: 1em;
+    display: flex;
+    border-radius: 1.7em;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #4a9effbb;
+    transition: all ease-in-out 0.7s;
+
+    input:not([type="checkbox"]) {
+        all: unset;
+        border-radius: 0.5em;
+        color: rgb(0, 29, 46);
+        margin: 0.5em;
+        padding: 0.8em;
+        background-color: #0182fae8;
+        transition: all ease-in-out 0.7s;
+    }
+
+
+    .terms {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin: 1.5em;
+        cursor: pointer;
+        user-select: none;
+        text-align: justify;
+        font-weight: bold;
+        max-width: 26em;
+
+        input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+
+            &:checked~.checkmark {
+                background-color: rgb(0, 68, 170);
+
+                &:after {
+                    display: block;
+                }
+            }
+        }
+
+        &:hover input~.checkmark {
+            background-color: rgb(91, 143, 255);
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 1.5em;
+            width: 1.5em;
+            background-color: rgb(177, 217, 255);
+
+            &:after {
+                content: "";
+                position: absolute;
+                display: none;
+                left: 9px;
+                top: 2px;
+                width: 7.5px;
+                height: 15px;
+                border: solid rgb(203, 234, 255);
+                border-width: 0 3px 3px 0;
+                transform: rotate(45deg);
+            }
+
+        }
+    }
+
+    button {
+        all: unset;
+        background-color: rgb(0, 43, 161);
+        color: rgb(131, 185, 255);
+        border-radius: .7em;
+        font-weight: bold;
+        padding: 1em;
+        margin-bottom: 1.5em;
+    }
+}
