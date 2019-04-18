@@ -1,0 +1,23 @@
+.board_item {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  margin: 0.7rem;
+  min-width: 10rem;
+  width: 10rem;
+  border-radius: 0.5rem;
+  padding:0.5rem 0.5rem 3rem  0.5rem;
+  color: white;
+  border: 0.1rem solid black;
+  background-color: rgba(129, 177, 255, 0.507);
+  transition: all ease-in-out 600ms;
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(106, 175, 255);
+  }
+  .board_header{
+    word-wrap: break-word;
+    flex: 1;
+    font-weight: bold;
+  }
+}
