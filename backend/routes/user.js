@@ -6,8 +6,16 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
 const passport = require('passport')
 const upload=require('../config/multer')
-
+const {authorization, isOwner}=require('../utils/middleware/authorization')
+router.get('/all',authorization, (req, res) => {
+    console.log(req.user)
+    User.find({}).then(users => res.send(users)).catch(err => res.status(500).send(err))
+})
+router.get('/:user_id',authorization,isOwner, (req, res) => {
+    User.findById(req.params.user_id).then(user => res.send(user)).catch(err => res.status(500).send(err))
+})
 router.post('/signup', (req, res) => {
+    console.log(req.body)
     jwt.sign({
         user: req.body.email
     }, config.EMAIL_SECRET, {
@@ -26,11 +34,9 @@ router.post('/signup', (req, res) => {
                 ...req.body,
                 imagePath:'/images/profile.png'
             }).save().then(user =>{
-                req.flash('info', 'user succesfully created, please confirm your email ');
-                 res.send(user)
+                res.send({user,'info': 'user succesfully created, please confirm your email '})
             }).catch(err =>{
-                req.flash('error', 'Email already in use, please choose another email');
-                res.send(err)
+                res.send({err,'error':'Email already in use, please choose another email'})
             })
         }).catch(console.log)
     })
@@ -41,44 +47,45 @@ router.get('/confirmation/:token', (req, res) => {
         userFound.confirmed = true
         userFound.save().then(user => {
             req.login(userFound._id, err => {
-                    req.flash('info', 'Congratulations! Your email account has been verified.');
-                    res.send(user)
+                    res.send({user,'info':'Congratulations! Your email account has been verified.'})
             })
         }).catch(console.log)
     }).catch(console.log)
 })
 router.post('/login', (req, res) => {
+    console.log(req.body.email)
     User.findOne({
         email: req.body.email
     }).then(userFound => {
         if (!userFound) {
-            req.flash('error','Email or password wrong');
-            return res.redirect('/login');
+            return res.send({message:'Email or password wrong'});
         }
-        if(!userFound.confirmed) {
-            req.flash('warn','You should confirm your email to log in');
-            return  res.redirect('/login');
-        }
-        bcrypt.compare(req.body.password, userFound.password).then(isMatch => {
-            if (!isMatch){
-                req.flash('error','Email or password wrong');
-               return res.redirect('/login');
-            }
-            req.login(userFound._id, err => {
-                res.send(err)
-            })
-        }).catch(err => res.send(err))
+        // if(!userFound.confirmed) {
+        //     return res.send('error','Email or password wrong');
+        // }
+        bcrypt.compare(req.body.password, userFound.password).then(isMatch => {  
+            console.log(userFound)
+            // if (!isMatch){
+            //     return res.status(400).send({message:'Email or password wrong'});
+            // }
+            userFound.generateAuthToken().then(token=>{
+                res.header('Authorization',token).send(userFound)
+            }).catch(console.log)
+        }).catch(console.log)
     })
 });
 router.post('/update',upload.single('image'),(req,res)=>{
-     User.findOneAndUpdate(req.session.passport.user,{
+     User.findOneAndUpdate(req.body.email,{
         ...req.body,
         imagePath:req.file.filename
      }).then(user=>{
-        req.flash('info', 'User successfully updated')
-        res.send(user)
+        res.send({user,'info':'User successfully updated'})
      }).catch(err=>console.log(err))
 })
+router.delete('/users/:user_id',authorization, (req, res) => {
+    User.findByIdAndDelete(req.params.user_id).then(user => res.send(user)).catch(err => res.status(500).send(err))
+})
+
 passport.serializeUser(function (user_id, done) {
     done(null, user_id);
 });
