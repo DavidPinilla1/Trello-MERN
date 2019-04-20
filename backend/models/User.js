@@ -3,8 +3,12 @@ const { pick } = require('lodash')
 const { isEmail } = require('validator')
 const bcrypt = require('bcrypt');
 const SALT_I = 9;
+const jwt=require('jsonwebtoken')
+const password=require('../config/password')
+
+const PASS=password.SECRET;
+
 const UserSchema = new mongoose.Schema({
-  // _id,
   name: {
     type: String,
     maxlength: 50,
@@ -36,14 +40,24 @@ const UserSchema = new mongoose.Schema({
     required: true,
     minlength: 8,
   },
-  imagePath: String
-}, {
+  imagePath: String,
+  
+  tokens:[{
+    token:{
+        type:String,
+        required:true
+    },
+    type:{
+        type:String,
+        required:true
+    }
+}] } , {
   timestamps: true
 });
 
 UserSchema.methods.toJSON = function () {
   const user = this;
-  return pick(user, ['_id', 'name', 'email'])
+  return pick(user, ['_id', 'name','lastname', 'email'])
 }
 
 UserSchema.pre('save', function (next) {
@@ -64,6 +78,22 @@ UserSchema.pre('findOneAndUpdate', function (next) {
       return next();
     }).catch(err => next(err))).catch(err => next(err))
 });
+UserSchema.methods.generateAuthToken=function(){
+  const user=this;
+const payload={
+  _id:user._id,
+  iat:Date.now()/1000,
+  exp:Date.now()/1000+ 60*60*24*7 // will expire in 7 days 
+}
+const token=jwt.sign(payload,PASS)
+console.log(token)
+  user.tokens.push({
+      token,
+      type:'auth'
+  });
+  return user.save().then(()=>token);
+}
+
 const User = mongoose.model('user', UserSchema)
 
 module.exports = User;
