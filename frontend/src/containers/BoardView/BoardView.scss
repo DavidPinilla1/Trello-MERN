@@ -1,0 +1,31 @@
+.BoardView{
+    display: flex;
+    flex-direction: column;
+    flex:1;
+    justify-content: flex-start;
+    .ListItems{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        .newList {
+            all: unset;
+            border-radius: 0.5rem;
+            margin: 0.7rem;
+            height: fit-content;
+            width: 10rem;
+            padding: 1.5rem;
+            color: white;
+            border: 0.1rem solid rgba(0, 0, 0, 0.76);
+            background-color: rgba(0, 250, 229, 0.493);
+            transition: all ease-in-out 600ms;
+            &:hover {
+                cursor: pointer;
+                background-color: rgba(52, 255, 170, 0.377);
+            }
+            &:focus {
+                cursor: unset;
+                background-color: rgba(0, 98, 57, 0.603);
+            }
+        }
+    }
+}

@@ -3,7 +3,7 @@ export default function(state = {}, action) {
       case 'LOGIN_FULFILLED':
       return{...state,"userLogged":action.payload}
       case 'REGISTER_FULFILLED':
-      return{...state,"userRegister":action.payload}
+      return{...state,"newUser":action.payload}
       default:
         return state;
     }

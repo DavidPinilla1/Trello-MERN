@@ -7,8 +7,8 @@ class Header extends Component {
       <div className="Header">
       <Link to="/"> <img className="logo" src="./images/trello.png" alt="logo"/></Link>
         <div className="userlinks">
-        <NavLink className="links" to="/login"><img src="images/login.png" alt="login image"/> Login</NavLink>
-        <NavLink className="links" to="/register"><img src="./images/register.png" alt="register image"/> Register</NavLink>
+        <NavLink className="links" activeClassName="active" to="/login"><img src="images/login.png" alt="login"/> Login</NavLink>
+        <NavLink className="links" activeClassName="active" to="/register"><img src="./images/register.png" alt="register"/> Register</NavLink>
         </div>
       </div>
     );

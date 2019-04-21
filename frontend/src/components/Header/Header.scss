@@ -1,10 +1,59 @@
-.Header{
-    position: fixed;
+.Header {
+    position: sticky;
     top: 0;
     left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background: #100e17;
     border-bottom: 1px solid #201c29;
     height: 80px;
-    box-shadow: 0 4px 3px rgba(0,0,0,.5);   
+    box-shadow: 0 4px 3px rgba(0, 0, 0, .5);
     width: 100%;
+    .logo{
+        display: block;
+        margin-left: 1em;
+        height: 3em;
+        opacity: 0.75;
+        transition: all ease-in-out 400ms;
+        &:hover{
+            
+        opacity: 1;
+        }
+    }
+    .userlinks {
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .links {
+        height: 100%;
+        border-left: 0.2em solid black;
+        display: flex;
+        padding-left: 0.7em;
+        padding-right: 0.7em;
+        align-items: center;
+        font-size: 1.5rem;
+        color: rgb(136, 136, 136);
+        text-decoration: none;
+
+        transition: all ease-in-out 400ms;
+        img {
+            display: block;
+            height: 2em;
+        }
+
+        &:hover {
+
+            background: #001f33;
+            color: rgb(221, 221, 221);
+        }
+    }
+    .active{
+        
+        background: #001f33;
+        color: rgb(221, 221, 221);
+    }
 }
