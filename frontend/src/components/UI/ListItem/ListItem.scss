@@ -1,0 +1,34 @@
+.ListItem{
+    
+    display: flex;
+    justify-content: space-between;
+    margin-left: 0.3em;
+    margin-bottom: 0.3em;
+    flex-direction: column;
+    border-radius: 0.5em;
+    border: 0.15em solid #002b3685;
+    background-color: rgba(0, 36, 65, 0.342);
+    min-height: 50vh;
+    &:hover {
+        box-shadow: 4px 4px 4px rgba(0, 50, 70, 0.808);
+        background-color: rgba(0, 69, 109, 0.726);
+    }
+
+    .List_header {
+        all: unset;
+        padding: 0.7em;
+        font-size: 1.4em;
+        border-top-left-radius: 0.3em;
+        border-top-right-radius: 0.3em;
+
+        color: rgb(161, 225, 255);
+        background: linear-gradient(0deg, rgba(0, 110, 255, 0.288) 0%, 5%, rgba(0, 12, 19, 0.699) 100%);
+
+        order: -1;
+
+    }
+    .TaskInput{
+        all:unset;
+        border-bottom: 0.1em solid black;
+    }
+}
