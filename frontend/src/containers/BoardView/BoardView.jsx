@@ -1,17 +1,9 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import {
-  getBoardById,
-  updateLists,
-   clearBoard
-} from '../../store/actions/board.js';
-import './BoardView.scss'
-import { Helmet } from "react-helmet";
+import { getBoardById, updateLists, clearBoard } from '../../store/actions/board.js';
+import './BoardView.scss';
 import ListItem from '../../components/UI/ListItem/ListItem.jsx'
 const BoardView =props=> {
-
-  const inputList = React.createRef()
-
 useEffect(() => {
     props.dispatch(getBoardById(props.match.params.id));
     return () => {
@@ -36,18 +28,14 @@ useEffect(() => {
     }
   }
   let board = props.board.currentBoard;
-  if(board) console.log(board.title)
+    {if(board)document.title=board.title+' - Trello MERN'}
     return (<div className="BoardView">
-      <Helmet titleTemplate="%s - Trello MERN" >
         <title>{board && board.title}</title>
-      </Helmet>
      <h1>{board && board.title }</h1>
       <div className="ListItems">{board && renderBoardLists(board)}
       <input
-        type="text" className="newList"
-        onKeyUp={handleKeyUp}
-        placeholder="Add new List"
-        ref={inputList} />
+        type="text" className="newList" onKeyUp={handleKeyUp}  placeholder="Add new List" 
+        onFocus={e=>e.target.placeholder = ''} onBlur={e=>e.target.placeholder = "Add new List"} />
       </div>
     </div>)
 }
