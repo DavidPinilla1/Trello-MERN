@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Error404.scss';
+import {Link} from 'react-router-dom'
 
-class Error404 extends Component {
-  render() {
+const Error404 =()=> {
     return (
-      <div className="404">
-      Error 404
-      </div>
+      <h2 className="Error404">
+       SORRY. We couldn't find that page. Try going back to <Link className="ErrorLink" to="/">our Trello's home page</Link> 
+      </h2>
     );
-  }
 }
 
 export default Error404;
