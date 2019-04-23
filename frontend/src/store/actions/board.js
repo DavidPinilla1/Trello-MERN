@@ -1,18 +1,18 @@
 import axios from 'axios';
-
+import store from '../index.js'
 export function getBoards(){
-    const request=axios.get('/api/board/all',{headers:{authorization:localStorage.getItem('authorization')}}).then(res=>res.data).catch(console.log)
-    return {
-     type: 'GET_BOARDS',
-     payload: request
-    }
+    axios.get('/api/board/all',{headers:{authorization:localStorage.getItem('authorization')}})
+    .then(res=>store.dispatch({
+       type:'GET_BOARDS',
+       payload:res.data
+    })).catch(console.log)
+    
  }
  export function getBoardById(id){
-    const request=axios.get(`/api/board/${id}`).then(res=>res.data).catch(console.log)
-    return {
-     type: 'GET_BOARD_BY_ID',
-     payload: request
-    }
+    axios.get(`/api/board/${id}`).then(res=>store.dispatch({
+      type:'GET_BOARD_BY_ID',
+      payload:res.data
+   })).catch(console.log)
  }
  export function clearBoard(){
    return {
@@ -20,18 +20,14 @@ export function getBoards(){
    }
 }
 export function newBoard(title){
-   const request=axios.post('/api/board/new',{title}).then(res=>res.data).catch(console.log)
-
-   return {
-    type: 'ADD_BOARD',
-    payload: request
-   }
+   axios.post('/api/board/new',{title}).then(res=>store.dispatch({
+      type:'ADD_BOARD',
+      payload:res.data
+   })).catch(console.log)
 }
 export function updateLists(id,lists){
-   const request=axios.patch(`/api/board/update/${id}`,{lists}).then(res=>res.data).catch(console.log)
-
-   return {
-    type: 'UPDATE_LISTS',
-    payload: request
-   }
+   axios.patch(`/api/board/update/${id}`,{lists}).then(res=>store.dispatch({
+      type:'UPDATE_LISTS',
+      payload:res.data
+   })).catch(console.log)
 }
