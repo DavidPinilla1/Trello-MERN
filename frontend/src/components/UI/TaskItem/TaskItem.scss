@@ -1,0 +1,17 @@
+.TaskItem{
+    margin: 0.8em;
+    padding: 1em;
+    background: rgba(45, 157, 221, 0.274);
+    color: #9dd8ff;
+    border-radius: 0.3em;
+    border: solid 0.07em  rgb(0, 28, 65);
+    display: flex;
+    flex-direction: column;
+    max-width: 85%;
+    transition: all ease-in-out 500ms;
+
+    &:hover {
+        background: rgba(0, 41, 65, 0.808);
+    }
+
+}
