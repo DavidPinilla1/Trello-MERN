@@ -12,7 +12,7 @@
   "author": "David Pinilla",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^3.0.5",
+    "bcrypt": "^5.0.0",
     "cookie-parser": "^1.4.4",
     "express": "^4.16.4",
     "express-flash": "0.0.2",
