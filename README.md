@@ -23,4 +23,4 @@ In this project I am going to replicate the Trello one using the same tecnologie
 - validator
 
 ## Author
-* **David Pinilla** - *Self-taught Full Stack developer and Student of GeeksHubsAcademy* 
+* **David Pinilla** - *Self-taught Full Stack developer* 
